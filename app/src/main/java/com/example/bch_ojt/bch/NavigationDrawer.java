@@ -44,7 +44,7 @@ public class NavigationDrawer{
             public void onItemClick(AdapterView parent, View view, int position, long id){
                 if(position==0){
                     Intent i = new Intent(view.getContext(), ProfileActivity.class);
-                    Toast.makeText(view.getContext(),session.getUserDetails().get("email"),Toast.LENGTH_LONG).show();
+                    //Toast.makeText(view.getContext(),session.getUserDetails().get("password"),Toast.LENGTH_LONG).show();
                     context.startActivity(i);
                 }
                 else if(position==1){

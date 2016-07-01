@@ -6,6 +6,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInstaller;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -30,12 +34,15 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -65,7 +72,13 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<String> location = new ArrayList<>();
     private ArrayList<String> careerId = new ArrayList<>();
     private ArrayList<Date> dateList = new ArrayList<>();
+    private ArrayList<Drawable> drawable = new ArrayList<>();
 
+    //private InputStream is;
+    private Drawable d;
+    private ImageView test;
+    private BitmapDrawable bd;
+    private Bitmap b;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,6 +113,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+
+
+
         /* Navigation Drawer */
         setupDrawer();
         nav.addNav();
@@ -130,29 +147,42 @@ public class MainActivity extends AppCompatActivity {
                     String key = (String) fields.next();
                     jsonArray.put(jsonResponse.get(key));
                 }
+
+                List<JSONObject> jsons = new ArrayList<JSONObject>();
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    jsons.add(jsonArray.getJSONObject(i));
+                }
+
+                Collections.sort(jsons, new Comparator<JSONObject>() {
+                    Long ld, rd;
+                    @Override
+                    public int compare(JSONObject lhs, JSONObject rhs) {
+                        try {
+                            ld = lhs.getLong("date_post");
+                            rd = rhs.getLong("date_post");
+                        } catch (JSONException e) {
+                            Log.v("TAGSA", "JSON: " + e.getMessage());
+                        }
+                        // Here you could parse string id to integer and then compare.
+                        return ld.compareTo(rd);
+                    }
+                });
+                test = (ImageView) findViewById(R.id.downloaded);
+
+                jsonArray = new JSONArray(jsons);
                 JSONObject jsonObj;
                 for(int i=0; i<jsonArray.length(); i++){
                     jsonObj = jsonArray.getJSONObject(i);
                     jobAd.add(jsonObj.getString("career_title"));
                     company.add(jsonObj.getString("name"));
-                    //company.add(String.valueOf(jsonArray.length()));
                     type.add(jsonObj.getString("industry_id"));
                     location.add(jsonObj.getString("region_city_code"));
                     careerId.add(jsonObj.getString("career_id"));
+                    dateList.add(new Date(jsonObj.getLong("date_post")));
+                    InputStream is = (InputStream) new URL(jsonObj.getString("employerLogo")).getContent();
+                    d = Drawable.createFromStream(is, null);
+                    drawable.add(d);
                 }
-
-/*
-                Date date = new Date(jsonArray.getJSONObject(0).getLong("date_post"));
-                dateList.add(date);
-                date = new Date(jsonArray.getJSONObject(1).getLong("date_post"));
-                dateList.add(date);
-                date = new Date(jsonArray.getJSONObject(2).getLong("date_post"));
-                dateList.add(date);
-                date = new Date(jsonArray.getJSONObject(3).getLong("date_post"));
-                dateList.add(date);
-                date = new Date(jsonArray.getJSONObject(4).getLong("date_post"));
-                dateList.add(date);
-*/
             }
             catch(MalformedURLException e) {
                 Log.v("TAGSA", "MalformedURL: " + e.getMessage());
@@ -174,10 +204,10 @@ public class MainActivity extends AppCompatActivity {
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(Void v) {
-
-            listAdapter = new JobListArrayAdapter(_activity, jobAd, company, type, location);
+            //test.setImageDrawable(d);
+            //test.setImageBitmap(b);
+            listAdapter = new JobListArrayAdapter(_activity, jobAd, company, type, location, dateList, drawable);
             jobListing.setAdapter(listAdapter);
-            //Toast.makeText(_context,jobAd.get(4),Toast.LENGTH_LONG).show();
         }
     }
     @Override

@@ -3,7 +3,7 @@
     <string name="logo">Logo</string>
     <string name="email_address">Email Address</string>
     <string name="password">Password</string>
-    <string name="sign_up">Don\'t have an account yet? SIGN UP!</string>
+    <string name="sign_up">Don\'t have an account yet?\nSIGN UP!</string>
     <string name="sign_in">SIGN IN</string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="title_activity_homepage">Homepage</string>
@@ -100,4 +100,9 @@
     <string name="logout">Logout</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
+    <string name="profileHeader">Personal Details</string>
+    <string name="application">Application</string>
+    <string name="interviews">Interviews</string>
+    <string name="saved_jobs">Saved Jobs</string>
+    <string name="update_profile">Update Profile</string>
 </resources>

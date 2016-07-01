@@ -44,8 +44,6 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Connection conn = null;
-        Statement stmt = null;
         session = new SessionManager(getApplicationContext());
         session.checkSessionInLogin();
         super.onCreate(savedInstanceState);
@@ -114,7 +112,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private class loginTask extends AsyncTask<String, Void, Boolean> {
         boolean validAccount = true;
-        String email,pass;
+        String email,password;
 
         @Override
         protected Boolean doInBackground(String... urls) {
@@ -135,7 +133,8 @@ public class LoginActivity extends AppCompatActivity {
                 JSONObject jsonObj = jsonResponse.optJSONObject("user");
 
                 email = urls[1];
-                pass = encrypt(urls[2]);
+                password = urls[2];
+                String encryptedPassword = encrypt(password);
                 //String group = String.valueOf(jsonObj.optInt("group_id",0));
                 /*String group = jsonObj.optString("group_id");
                 if(group.equals("2")) return false;*/
@@ -143,7 +142,7 @@ public class LoginActivity extends AppCompatActivity {
                 //String data = "email: " + jsonObj.optString("email").toString() + "\npassword: " + jsonObj.optString("password").toString();
                 //data = String.valueOf(conn.getResponseCode());
                 //group_id: 2 = Job Seeker; accept only "Job Seeker" accounts
-                if( email.equals(jsonObj.optString("email")) && pass.equals(jsonObj.optString("password")) ) {
+                if( email.equals(jsonObj.optString("email")) && encryptedPassword.equals(jsonObj.optString("password")) ) {
                     if("2".equals(jsonObj.optString("group_id"))) {
                         return true;
                     }
@@ -173,7 +172,7 @@ public class LoginActivity extends AppCompatActivity {
             if(result) {
                 //button.setText(result);
                 Toast.makeText(getApplicationContext(), "Valid", Toast.LENGTH_LONG).show();
-                session.createLoginSession(email,pass);
+                session.createLoginSession(email,password);
                 switchIntent();
             }
             else if(validAccount == false) {

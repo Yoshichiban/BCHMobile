@@ -28,6 +28,16 @@
             android:scrollbars="none"
             />
 
+        <ImageView
+            android:layout_width="200sp"
+            android:layout_height="200sp"
+            android:id="@+id/downloaded"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="false"
+            android:layout_marginTop="145dp"
+            android:layout_alignParentStart="false" />
+
 
         <!--
         <ScrollView

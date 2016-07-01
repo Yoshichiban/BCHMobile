@@ -1,65 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="fill_parent"
-    android:layout_height="wrap_content">
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true">
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="120sp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/jobAdTV"
-            android:textSize="20sp"/>
+            android:textSize="20sp"
+            android:layout_toLeftOf="@+id/logo"
+            android:layout_toStartOf="@+id/logo"
+            android:layout_alignParentStart="true"
+            android:textAlignment="textStart" />
 
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/companyTV"
-            android:layout_below="@id/jobAdTV"/>
+            android:layout_below="@id/jobAdTV"
+            android:layout_toLeftOf="@+id/logo"
+            android:layout_toStartOf="@+id/logo"
+            android:layout_alignParentStart="true"
+            android:textAlignment="textStart" />
 
         <ImageView
             android:layout_width="20sp"
             android:layout_height="20sp"
-            android:src="@mipmap/ic_launcher"
+            android:src="@android:drawable/ic_menu_agenda"
             android:id="@+id/typeImageIV"
-            android:layout_below="@id/companyTV"/>
+            android:layout_below="@id/companyTV"
+            android:layout_alignParentStart="true" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/typeTV"
-            android:layout_below="@id/companyTV"
-            android:layout_toRightOf="@id/typeImageIV"/>
+            android:textAlignment="textStart"
+            android:layout_toLeftOf="@+id/logo"
+            android:layout_toRightOf="@+id/typeImageIV"
+            android:layout_below="@+id/companyTV" />
 
         <ImageView
             android:layout_width="20sp"
             android:layout_height="20sp"
-            android:src="@mipmap/ic_launcher"
+            android:src="@android:drawable/ic_menu_compass"
             android:id="@+id/locationImageIV"
-            android:layout_below="@id/typeImageIV"/>
+            android:layout_below="@id/typeImageIV"
+            android:layout_alignParentStart="true" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/locationTV"
-            android:layout_below="@id/typeTV"
-            android:layout_toRightOf="@id/locationImageIV"/>
+            android:textAlignment="textStart"
+            android:layout_toLeftOf="@+id/logo"
+            android:layout_below="@+id/typeTV"
+            android:layout_toRightOf="@+id/locationImageIV" />
 
-    </RelativeLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/date"
+            android:layout_below="@id/locationImageIV"
+            android:layout_toLeftOf="@+id/logo"
+            android:layout_toStartOf="@+id/logo"
+            android:layout_alignParentStart="true"
+            android:textAlignment="textStart" />
 
-    <ImageView
-        android:id="@+id/logo"
-        android:layout_width="100sp"
-        android:layout_height="100sp"
-        android:src="@mipmap/ic_launcher"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true">
-    </ImageView>
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="75sp"
+            android:layout_height="75sp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginLeft="10sp"
+            android:layout_alignBottom="@+id/date">
+        </ImageView>
 
 </RelativeLayout>

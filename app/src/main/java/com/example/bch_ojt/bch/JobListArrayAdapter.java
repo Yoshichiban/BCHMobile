@@ -5,6 +5,7 @@ package com.example.bch_ojt.bch;
  */
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +14,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class JobListArrayAdapter extends ArrayAdapter<String> {
     private final Activity context;
@@ -21,16 +24,19 @@ public class JobListArrayAdapter extends ArrayAdapter<String> {
     private final ArrayList<String> company;
     private final ArrayList<String> type;
     private final ArrayList<String> location;
+    private final ArrayList<Date> date;
+    private final ArrayList<Drawable> drawable;
 
     static class ViewHolder {
         public TextView jobAd;
         public TextView company;
         public TextView type;
         public TextView location;
+        public TextView date;
         public ImageView logo;
     }
 
-    public JobListArrayAdapter(Activity context, ArrayList<String> j, ArrayList<String> c, ArrayList<String> t, ArrayList<String> l) {
+    public JobListArrayAdapter(Activity context, ArrayList<String> j, ArrayList<String> c, ArrayList<String> t, ArrayList<String> l, ArrayList<Date> d, ArrayList<Drawable> dr) {
         super(context, R.layout.rowlayout, j);
 
         this.context = context;
@@ -39,18 +45,8 @@ public class JobListArrayAdapter extends ArrayAdapter<String> {
         this.company = c;
         this.type = t;
         this.location = l;
-
-        /*
-        String jobAdString = this.jobAd.get(0);
-        String companyString = this.company.get(1);
-        String typeString = this.type.get(3);
-        String locationString = this.location.get(4);
-
-        Toast.makeText(context,jobAdString,Toast.LENGTH_LONG).show();
-
-        Toast.makeText(context,companyString,Toast.LENGTH_LONG).show();
-        Toast.makeText(context,typeString,Toast.LENGTH_LONG).show();
-        Toast.makeText(context,locationString,Toast.LENGTH_LONG).show();*/
+        this.date = d;
+        this.drawable = dr;
     }
 
     @Override
@@ -66,6 +62,7 @@ public class JobListArrayAdapter extends ArrayAdapter<String> {
             viewHolder.company = (TextView) rowView.findViewById(R.id.companyTV);
             viewHolder.type = (TextView) rowView.findViewById(R.id.typeTV);
             viewHolder.location = (TextView) rowView.findViewById(R.id.locationTV);
+            viewHolder.date = (TextView) rowView.findViewById(R.id.date);
             viewHolder.logo = (ImageView) rowView.findViewById(R.id.logo);
             rowView.setTag(viewHolder);
         }
@@ -76,12 +73,21 @@ public class JobListArrayAdapter extends ArrayAdapter<String> {
         String companyString = company.get(position);
         String typeString = type.get(position);
         String locationString = location.get(position);
+        String dateString = DateFormat.getDateTimeInstance(
+                DateFormat.MEDIUM, DateFormat.SHORT).format(date.get(position));
+        Drawable logoDrawable = drawable.get(position);
 
         holder.jobAd.setText(jobAdString);
         holder.company.setText(companyString);
         holder.type.setText(typeString);
         holder.location.setText(locationString);
-
+        holder.date.setText(dateString);
+        if(logoDrawable != null){
+            holder.logo.setImageDrawable(logoDrawable);
+        }
+        else {
+            holder.logo.setImageResource(R.drawable.bchmobilelogo);
+        }
 
         return rowView;
     }

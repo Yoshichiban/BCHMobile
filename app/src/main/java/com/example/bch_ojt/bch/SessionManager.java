@@ -40,12 +40,13 @@ public class SessionManager {
         }
     }
     private boolean isLoggedIn(){
+
         return pref.getBoolean("isLoggedIn", false);
     }
-    public void createLoginSession(String email, String pass) {
+    public void createLoginSession(String email, String password) {
         editor.putBoolean("isLoggedIn", true);
         editor.putString("email", email);
-        editor.putString("password", pass);
+        editor.putString("password", password);
 
         editor.commit();
     }

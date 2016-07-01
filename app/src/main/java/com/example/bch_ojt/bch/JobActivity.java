@@ -26,7 +26,7 @@ public class JobActivity extends AppCompatActivity {
     private SessionManager session;
     private Intent prevIntent;
     private String careerId;
-    private String careerTitle, careerDescription,regionCityCode,companyName,companyDescription;
+    private String careerTitle, careerDescription, regionCityCode, companyName, companyDescription;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
