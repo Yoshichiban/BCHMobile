@@ -74,11 +74,8 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Date> dateList = new ArrayList<>();
     private ArrayList<Drawable> drawable = new ArrayList<>();
 
-    //private InputStream is;
+    private InputStream is;
     private Drawable d;
-    private ImageView test;
-    private BitmapDrawable bd;
-    private Bitmap b;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,7 +104,6 @@ public class MainActivity extends AppCompatActivity {
         jobListing.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             public void onItemClick(AdapterView parent, View view, int position, long id){
                 Intent i = new Intent(view.getContext(), JobActivity.class);
-                //Toast.makeText(view.getContext(),jobAd[position],Toast.LENGTH_LONG).show();
                 i.putExtra("careerId",careerId.get(position));
                 startActivity(i);
             }
@@ -167,7 +163,6 @@ public class MainActivity extends AppCompatActivity {
                         return ld.compareTo(rd);
                     }
                 });
-                test = (ImageView) findViewById(R.id.downloaded);
 
                 jsonArray = new JSONArray(jsons);
                 JSONObject jsonObj;
@@ -179,7 +174,7 @@ public class MainActivity extends AppCompatActivity {
                     location.add(jsonObj.getString("region_city_code"));
                     careerId.add(jsonObj.getString("career_id"));
                     dateList.add(new Date(jsonObj.getLong("date_post")));
-                    InputStream is = (InputStream) new URL(jsonObj.getString("employerLogo")).getContent();
+                    is = (InputStream) new URL(jsonObj.getString("employerLogo")).getContent();
                     d = Drawable.createFromStream(is, null);
                     drawable.add(d);
                 }

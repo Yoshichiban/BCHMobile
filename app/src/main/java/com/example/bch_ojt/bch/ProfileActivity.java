@@ -59,6 +59,8 @@ public class ProfileActivity extends AppCompatActivity {
         cellNoTV = (TextView) findViewById(R.id.cellNoTV);
         addressTV = (TextView) findViewById(R.id.addressTV);
 
+        _context = getApplicationContext();
+        session = new SessionManager(_context);
         HashMap<String, String> user = session.getUserDetails();
         email = user.get("email");
         password = user.get("password");

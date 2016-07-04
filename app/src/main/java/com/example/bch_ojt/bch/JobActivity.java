@@ -2,20 +2,20 @@ package com.example.bch_ojt.bch;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
-import android.support.annotation.BoolRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -26,7 +26,31 @@ public class JobActivity extends AppCompatActivity {
     private SessionManager session;
     private Intent prevIntent;
     private String careerId;
-    private String careerTitle, careerDescription, regionCityCode, companyName, companyDescription;
+    private String jobTitle, jobDescription, regionCityCode, companyName;
+
+    private ImageView companylogoIV;
+    private TextView jobTitleTV;
+    private TextView companyNameTV;
+    private TextView locationTV;
+    private TextView jobInfoHeadingTV;
+    private TextView industryTV;
+    private TextView employmentTypeTV;
+    private TextView jobLevelTV;
+    private TextView salaryTV;
+    private TextView specializationTV;
+    private TextView educationTV;
+    private TextView experienceTV;
+    private TextView prefAgeTV;
+    private TextView prefGenderTV;
+
+    private TextView jobDescriptionHeadingTV;
+    private TextView jobDescriptionTV;
+
+    private TextView jobRequirementsHeadingTV;
+    private TextView jobRequirementsTV;
+
+    private InputStream is;
+    private Drawable d;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +61,26 @@ public class JobActivity extends AppCompatActivity {
         careerId = prevIntent.getStringExtra("careerId");
         _context = getApplicationContext();
         session = new SessionManager(_context);
+
+        companylogoIV = (ImageView) findViewById(R.id.companyLogo);
+        jobTitleTV = (TextView) findViewById(R.id.jobTitleTV);
+        companyNameTV = (TextView) findViewById(R.id.companyNameTV);
+        locationTV = (TextView) findViewById(R.id.locationTV);
+        jobInfoHeadingTV = (TextView) findViewById(R.id.jobInfoHeadingTV);
+        industryTV = (TextView) findViewById(R.id.industryTV);
+        employmentTypeTV = (TextView) findViewById(R.id.employmentTypeTV);
+        jobLevelTV = (TextView) findViewById(R.id.jobLevelTV);
+        salaryTV = (TextView) findViewById(R.id.salaryTV);
+        specializationTV = (TextView) findViewById(R.id.specializationTV);
+        educationTV = (TextView) findViewById(R.id.educationTV);
+        experienceTV = (TextView) findViewById(R.id.experienceTV);
+        prefAgeTV = (TextView) findViewById(R.id.prefAgeTV);
+        prefGenderTV = (TextView) findViewById(R.id.prefGenderTV);
+        jobDescriptionHeadingTV = (TextView) findViewById(R.id.jobDescriptionHeadingTV);
+        jobDescriptionTV = (TextView) findViewById(R.id.jobDescriptionTV);
+        jobRequirementsHeadingTV = (TextView) findViewById(R.id.jobRequirementsHeadingTV);
+        jobRequirementsTV = (TextView) findViewById(R.id.jobRequirementsTV);
+
         String urlText = "http://stagingalpha.bpocareerhub.com/APIJobSearch/getSearchJobs/EDDRO2ZBTN7TM3KYFV604";
         new getJobInfoTask().execute(urlText,careerId);
     }
@@ -60,11 +104,12 @@ public class JobActivity extends AppCompatActivity {
 
                 JSONObject jsonResponse = new JSONObject(String.valueOf(total));
                 JSONObject jsonObj = jsonResponse.optJSONObject(careerId);
-                careerTitle = jsonObj.getString("career_title");
-                careerDescription = jsonObj.getString("career_description");
+                jobTitle = jsonObj.getString("career_title");
+                jobDescription = jsonObj.getString("career_description");
                 regionCityCode = jsonObj.getString("region_city_code");
                 companyName = jsonObj.getString("name");
-                companyDescription = jsonObj.getString("description");
+                is = (InputStream) new URL(jsonObj.getString("employerLogo")).getContent();
+                d = Drawable.createFromStream(is, null);
             }
             catch(MalformedURLException e) {
                 Log.v("TAGSA", "MalformedURL: " + e.getMessage());
@@ -86,17 +131,38 @@ public class JobActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void v) {
            // Toast.makeText(_context, careerTitle, Toast.LENGTH_LONG).show();
-            TextView careerTitleTV = (TextView) findViewById(R.id.careerTitleTV);
-            TextView careerDescriptionTV = (TextView) findViewById(R.id.careerDescriptionTV);
-            TextView regionCityCodeTV = (TextView) findViewById(R.id.regionCityCodeTV);
-            TextView companyNameTV = (TextView) findViewById(R.id.companyNameTV);
-            TextView companyDescriptionTV = (TextView) findViewById(R.id.companyDescriptionTV);
 
-            careerTitleTV.setText(careerTitle);
-            careerDescriptionTV.setText(careerDescription);
-            regionCityCodeTV.setText(regionCityCode);
+            if(d != null){
+                companylogoIV.setImageDrawable(d);
+            }
+            else {
+                companylogoIV.setImageResource(R.drawable.bchmobilelogo);
+            }
+
+            jobTitleTV.setText(jobTitle);
             companyNameTV.setText(companyName);
-            companyDescriptionTV.setText(companyDescription);
+            locationTV.setText(regionCityCode);
+
+            jobInfoHeadingTV.setText("Job Information:\n");
+            /*
+            TO DO: get the following data from API
+             */
+            industryTV.setText("Industry: Call Center / IT-Enabled Services / BPO");
+            employmentTypeTV.setText("Employment Type: Regular");
+            jobLevelTV.setText("Fresh Graduate");
+            salaryTV.setText("Monthly Salary: Not specified");
+            specializationTV.setText("Specialization: Others");
+            educationTV.setText("Educational Attainment: Bachelor's / College Undergraduate");
+            experienceTV.setText("Work Experience: None");
+            prefAgeTV.setText("Preferred Age: None");
+            prefGenderTV.setText("Preferred Gender: None");
+
+            jobDescriptionHeadingTV.setText("Job Description:\n");
+            jobDescriptionTV.setText(jobDescription);
+
+            jobRequirementsHeadingTV.setText("Job Requirements:\n");
+            jobRequirementsTV.setText("College Degree");
+
         }
     }
 }
