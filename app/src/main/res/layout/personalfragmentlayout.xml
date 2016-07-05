@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="5sp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20sp"
+            android:id="@+id/profileHeaderIV"
+            android:text="@string/profileHeader"
+            android:layout_marginTop="15sp"
+            android:textColor="@color/primary_text_default_material_light"
+            android:textSize="@dimen/abc_text_size_subhead_material"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:layout_width="20sp"
+            android:layout_height="20sp"
+            android:id="@+id/fullNameImageIV"
+            android:layout_below="@+id/profileHeaderIV"
+            android:src="@drawable/bchmobilelogo"
+            android:layout_marginRight="10sp"
+            android:layout_marginTop="10sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20sp"
+            android:id="@+id/fullNameTV"
+            android:layout_toRightOf="@+id/fullNameImageIV"
+            android:layout_below="@+id/profileHeaderIV"
+            android:layout_marginRight="10sp"
+            android:layout_marginTop="10sp"
+            android:textColor="@color/primary_text_default_material_light" />
+
+        <ImageView
+            android:layout_width="20sp"
+            android:layout_height="20sp"
+            android:id="@+id/genderIV"
+            android:layout_below="@+id/fullNameImageIV"
+            android:src="@drawable/bchmobilelogo"
+            android:layout_marginRight="10sp"
+            android:layout_marginTop="10sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20sp"
+            android:id="@+id/genderTV"
+            android:layout_below="@+id/fullNameTV"
+            android:layout_toRightOf="@+id/genderIV"
+            android:layout_marginRight="10sp"
+            android:layout_marginTop="10sp"
+            android:textColor="@color/primary_text_default_material_light" />
+
+        <ImageView
+            android:layout_width="20sp"
+            android:layout_height="20sp"
+            android:id="@+id/statusIV"
+            android:layout_below="@+id/genderIV"
+            android:src="@drawable/bchmobilelogo"
+            android:layout_marginRight="10sp"
+            android:layout_marginTop="10sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20sp"
+            android:id="@+id/statusTV"
+            android:layout_below="@+id/genderTV"
+            android:layout_toRightOf="@+id/statusIV"
+            android:layout_marginRight="10sp"
+            android:layout_marginTop="10sp"
+            android:textColor="@color/primary_text_default_material_light" />
+
+        <ImageView
+            android:layout_width="20sp"
+            android:layout_height="20sp"
+            android:id="@+id/birthdateIV"
+            android:layout_below="@+id/statusIV"
+            android:src="@drawable/bchmobilelogo"
+            android:layout_marginRight="10sp"
+            android:layout_marginTop="10sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20sp"
+            android:id="@+id/birthdateTV"
+            android:layout_below="@+id/statusTV"
+            android:layout_toRightOf="@+id/birthdateIV"
+            android:layout_marginRight="10sp"
+            android:layout_marginTop="10sp"
+            android:textColor="@color/primary_text_default_material_light" />
+
+        <ImageView
+            android:layout_width="20sp"
+            android:layout_height="20sp"
+            android:id="@+id/emailIV"
+            android:layout_below="@+id/birthdateIV"
+            android:src="@drawable/bchmobilelogo"
+            android:layout_marginRight="10sp"
+            android:layout_marginTop="10sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20sp"
+            android:id="@+id/emailTV"
+            android:layout_below="@+id/birthdateTV"
+            android:layout_toRightOf="@+id/emailIV"
+            android:layout_marginRight="10sp"
+            android:layout_marginTop="10sp"
+            android:textColor="@color/primary_text_default_material_light" />
+
+        <ImageView
+            android:layout_width="20sp"
+            android:layout_height="20sp"
+            android:id="@+id/telNoIV"
+            android:layout_below="@+id/emailIV"
+            android:src="@drawable/bchmobilelogo"
+            android:layout_marginRight="10sp"
+            android:layout_marginTop="10sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20sp"
+            android:id="@+id/telNoTV"
+            android:layout_below="@+id/emailTV"
+            android:layout_toRightOf="@+id/telNoIV"
+            android:layout_marginRight="10sp"
+            android:layout_marginTop="10sp"
+            android:textColor="@color/primary_text_default_material_light" />
+
+        <ImageView
+            android:layout_width="20sp"
+            android:layout_height="20sp"
+            android:id="@+id/cellNoIV"
+            android:layout_below="@+id/telNoIV"
+            android:src="@drawable/bchmobilelogo"
+            android:layout_marginRight="10sp"
+            android:layout_marginTop="10sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20sp"
+            android:id="@+id/cellNoTV"
+            android:layout_below="@+id/telNoTV"
+            android:layout_toRightOf="@+id/cellNoIV"
+            android:layout_marginRight="10sp"
+            android:layout_marginTop="10sp"
+            android:textColor="@color/primary_text_default_material_light" />
+
+        <ImageView
+            android:layout_width="20sp"
+            android:layout_height="20sp"
+            android:id="@+id/addressIV"
+            android:layout_below="@+id/cellNoIV"
+            android:src="@drawable/bchmobilelogo"
+            android:layout_marginRight="10sp"
+            android:layout_marginTop="10sp"
+            android:layout_marginBottom="10sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20sp"
+            android:id="@+id/addressTV"
+            android:layout_below="@+id/cellNoTV"
+            android:layout_toRightOf="@+id/addressIV"
+            android:layout_marginRight="10sp"
+            android:layout_marginTop="10sp"
+            android:textColor="@color/primary_text_default_material_light" />
+
+</RelativeLayout>
