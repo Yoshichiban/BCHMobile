@@ -1,10 +1,13 @@
 package com.example.bch_ojt.bch;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
@@ -72,5 +75,15 @@ public class DetailsFragment extends Fragment {
         return v;
 
     }
+
+        @Override
+        public void setUserVisibleHint(boolean isVisibleToUser) {
+            super.setUserVisibleHint(isVisibleToUser);
+            if (isVisibleToUser) {
+                ((ProfileActivity)getActivity()).updateActiveFragment(1);
+            }
+            else {
+            }
+        }
 
 }

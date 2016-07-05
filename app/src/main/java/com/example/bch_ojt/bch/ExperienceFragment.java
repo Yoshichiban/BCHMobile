@@ -43,4 +43,14 @@ public class ExperienceFragment extends Fragment {
 
     }
 
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            ((ProfileActivity)getActivity()).updateActiveFragment(3);
+        }
+        else {
+        }
+    }
+
 }

@@ -43,4 +43,14 @@ public class EducationFragment extends Fragment {
 
     }
 
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            ((ProfileActivity)getActivity()).updateActiveFragment(4);
+        }
+        else {
+        }
+    }
+
 }

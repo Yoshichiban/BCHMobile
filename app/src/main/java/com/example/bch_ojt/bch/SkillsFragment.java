@@ -38,12 +38,22 @@ public class SkillsFragment extends Fragment {
 
         TextView skillsTV = (TextView)v.findViewById(R.id.skillsTV);
         TextView languagesTV = (TextView)v.findViewById(R.id.languagesTV);
-
+        
         skillsTV.setText(skills);
         languagesTV.setText(languages);
 
         return v;
 
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            ((ProfileActivity)getActivity()).updateActiveFragment(5);
+        }
+        else {
+        }
     }
 
 }

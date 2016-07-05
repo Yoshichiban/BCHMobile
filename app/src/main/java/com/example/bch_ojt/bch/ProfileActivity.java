@@ -1,12 +1,14 @@
 package com.example.bch_ojt.bch;
 
 import android.content.Context;
+import android.media.Image;
 import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.json.JSONException;
@@ -27,6 +29,9 @@ public class ProfileActivity extends AppCompatActivity {
     private Context _context;//application context
     private SessionManager session;
 
+    private int currentFragment;
+    private ImageView activeIV;
+
     //private String fullName, gender, status, birthdate, email, telNo, cellNo, address, pass;
     private String fullName;
     private String gender;
@@ -42,20 +47,24 @@ public class ProfileActivity extends AppCompatActivity {
     private String skills;
     private String languages;
 
-    private TextView fullNameTV;
-    private TextView genderTV;
-    private TextView statusTV;
-    private TextView birthdateTV;
-    private TextView emailTV;
-    private TextView telNoTV;
-    private TextView cellNoTV;
-    private TextView addressTV;
+    private ImageView detailsIV;
+    private ImageView preferenceIV;
+    private ImageView experienceIV;
+    private ImageView educationIV;
+    private ImageView skillsIV;
+
 
     ProfilePageAdapter pageAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+        detailsIV = (ImageView)findViewById(R.id.detailsIV);
+        preferenceIV = (ImageView)findViewById(R.id.preferenceIV);
+        experienceIV = (ImageView)findViewById(R.id.experienceIV);
+        educationIV = (ImageView)findViewById(R.id.educationIV);
+        skillsIV = (ImageView)findViewById(R.id.skillsIV);
 
         _context = getApplicationContext();
         session = new SessionManager(_context);
@@ -142,5 +151,45 @@ public class ProfileActivity extends AppCompatActivity {
 
     }
 
+    public void updateActiveFragment(int fragment){
+        deactivatePreviousFragment(currentFragment);
+        switch (fragment){
+            case 1:
+                detailsIV.setImageResource(R.drawable.personal_h);
+                break;
+            case 2:
+                preferenceIV.setImageResource(R.drawable.preference_h);
+                break;
+            case 3:
+                experienceIV.setImageResource(R.drawable.experience_h);
+                break;
+            case 4:
+                educationIV.setImageResource(R.drawable.education_h);
+                break;
+            case 5:
+                skillsIV.setImageResource(R.drawable.skills_h);
+                break;
+        }
+        currentFragment = fragment;
+    }
 
+    private void deactivatePreviousFragment(int prevFragment){
+        switch(prevFragment){
+            case 1:
+                detailsIV.setImageResource(R.drawable.personal);
+                break;
+            case 2:
+                preferenceIV.setImageResource(R.drawable.preference);
+                break;
+            case 3:
+                experienceIV.setImageResource(R.drawable.experience);
+                break;
+            case 4:
+                educationIV.setImageResource(R.drawable.education);
+                break;
+            case 5:
+                skillsIV.setImageResource(R.drawable.skills);
+                break;
+        }
+    }
 }
