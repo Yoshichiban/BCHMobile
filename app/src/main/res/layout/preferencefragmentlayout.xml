@@ -37,7 +37,8 @@
         android:text="Employment Type"
         android:textStyle="bold"
         android:layout_below="@+id/positionHeadingTV"
-        android:layout_marginLeft="5sp" />
+        android:layout_marginLeft="5sp"
+        android:layout_marginBottom="10sp" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -69,7 +70,8 @@
         android:text="Industry"
         android:textStyle="bold"
         android:layout_below="@+id/locationHeadingTV"
-        android:layout_marginLeft="5sp" />
+        android:layout_marginLeft="5sp"
+        android:layout_marginBottom="10sp" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -82,7 +84,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/availabilityHeadingTV"
-        android:text="Availability:"
+        android:text="Availability: "
         android:textStyle="bold"
         android:layout_below="@+id/industryTV"
         android:layout_marginLeft="5sp" />
