@@ -1,13 +1,13 @@
 package com.example.bch_ojt.bch;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -19,7 +19,9 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class ProfileActivity extends AppCompatActivity {
     private Context _context;//application context
@@ -35,6 +37,10 @@ public class ProfileActivity extends AppCompatActivity {
     private String cellNo;
     private String address;
     private String password;
+    private String experience;
+    private String education;
+    private String skills;
+    private String languages;
 
     private TextView fullNameTV;
     private TextView genderTV;
@@ -45,19 +51,11 @@ public class ProfileActivity extends AppCompatActivity {
     private TextView cellNoTV;
     private TextView addressTV;
 
+    ProfilePageAdapter pageAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-
-        fullNameTV = (TextView) findViewById(R.id.fullNameTV);
-        genderTV = (TextView) findViewById(R.id.genderTV);
-        statusTV = (TextView) findViewById(R.id.statusTV);
-        birthdateTV = (TextView) findViewById(R.id.birthdateTV);
-        emailTV = (TextView) findViewById(R.id.emailTV);
-        telNoTV = (TextView) findViewById(R.id.telNoTV);
-        cellNoTV = (TextView) findViewById(R.id.cellNoTV);
-        addressTV = (TextView) findViewById(R.id.addressTV);
 
         _context = getApplicationContext();
         session = new SessionManager(_context);
@@ -66,6 +64,7 @@ public class ProfileActivity extends AppCompatActivity {
         password = user.get("password");
         String urlText = "http://stagingalpha.bpocareerhub.com/APILogin/processLogin/c019edda9ce8a7b4532344c7928b6786/" + email + "/" + password;
         new getProfileInfoTask().execute(urlText);
+
     }
     private class getProfileInfoTask extends AsyncTask<String, Void, Void> {
 
@@ -81,8 +80,6 @@ public class ProfileActivity extends AppCompatActivity {
                 while ((line = r.readLine()) != null) {
                     total.append(line).append('\n');
                 }
-                //System.out.println(total);
-                //return String.valueOf(conn.getResponseMessage());
 
                 JSONObject jsonResponse = new JSONObject(String.valueOf(total));
                 JSONObject jsonObj = jsonResponse.optJSONObject("user");
@@ -94,6 +91,11 @@ public class ProfileActivity extends AppCompatActivity {
                 telNo = jsonObj.getString("date_activated");//TO EDIT
                 cellNo = jsonObj.getString("mobile_number");
                 address = jsonObj.getString("address_details");
+                experience = "La Liga Filipina\nCEO (1892)\n\nLa Solidaridad\nContributory Writer (1889)\n\nFreelance Author\nLiterary Author (1884 - 1887)";
+                education = "Universidad Central de Madrid\nLicentiate in Philosophy and Letters (1882 - 1885)";
+                skills = "Playboy Extraordinaire\nAdvanced";
+                languages = "Filipino (Tagalog)\nNative";
+
 
             }
             catch(MalformedURLException e) {
@@ -115,16 +117,30 @@ public class ProfileActivity extends AppCompatActivity {
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(Void v) {
-            // Toast.makeText(_context, careerTitle, Toast.LENGTH_LONG).show();
-            fullNameTV.setText(fullName);
-            genderTV.setText(gender);
-            statusTV.setText(status);
-            birthdateTV.setText(birthdate);
-            emailTV.setText(email);
-            telNoTV.setText(telNo);
-            cellNoTV.setText(cellNo);
-            addressTV.setText(address);
+
+            List<Fragment> fragments = getFragments();
+
+            pageAdapter = new ProfilePageAdapter(getSupportFragmentManager(), fragments);
+
+            ViewPager pager = (ViewPager)findViewById(R.id.profilePager);
+
+            pager.setAdapter(pageAdapter);
         }
     }
+
+    private List<Fragment> getFragments(){
+
+        List<Fragment> fList = new ArrayList<Fragment>();
+
+        fList.add(DetailsFragment.newInstance(fullName,gender,status,birthdate,email,telNo,cellNo,address));
+        fList.add(PreferenceFragment.newInstance("Yehosaru"));
+        fList.add(ExperienceFragment.newInstance(experience));
+        fList.add(EducationFragment.newInstance(education));
+        fList.add(SkillsFragment.newInstance(skills,languages));
+
+        return fList;
+
+    }
+
 
 }

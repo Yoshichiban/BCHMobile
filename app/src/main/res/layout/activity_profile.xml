@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,14 +8,13 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.bch_ojt.bch.ProfileActivity"
-    android:weightSum="100">
+    tools:context="com.example.bch_ojt.bch.ProfileActivity">
 
     <!-- Profile -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="20">
+        android:id="@+id/profileHeader">
         <ImageView
             android:layout_width="75sp"
             android:layout_height="75sp"
@@ -101,21 +100,6 @@
                 android:textAlignment="center"
                 android:textSize="12sp" />
 
-            <ProgressBar
-                style="?android:attr/progressBarStyleSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/progressBar"
-                android:progress="@integer/abc_config_activityShortDur"
-                android:progressBackgroundTint="@color/colorPrimaryDark"
-                android:progressDrawable="@drawable/abc_ratingbar_small_material"
-                android:background="@color/colorAccent"
-                android:layout_centerVertical="true"
-                android:layout_alignLeft="@+id/textView5"
-                android:layout_alignStart="@+id/textView5"
-                android:layout_alignRight="@+id/textView4"
-                android:layout_alignEnd="@+id/textView4" />
-
         </RelativeLayout>
     </LinearLayout>
 
@@ -124,8 +108,9 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="10">
+        android:layout_height="25sp"
+        android:id="@+id/profileTabs"
+        android:layout_below="@+id/profileHeader">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -160,186 +145,23 @@
             android:layout_weight="3"
             android:src="@android:drawable/presence_online" />
     </LinearLayout>
+
     <!-- Personal Details -->
 
-    <LinearLayout
+    <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="70">
+        android:text="@string/update_profile"
+        android:id="@+id/profileButton"
+        android:background="@color/colorPrimaryDark"
+        android:textColor="#FFF"
+        android:textSize="@dimen/notification_subtext_size"
+        android:layout_alignParentBottom="true" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="20sp"
-                android:id="@+id/profileHeaderIV"
-                android:text="@string/profileHeader"
-                android:layout_marginRight="10sp"
-                android:layout_marginTop="10sp"
-                android:textColor="@color/primary_text_default_material_light"
-                android:textSize="@dimen/abc_text_size_subhead_material" />
-
-            <ImageView
-                android:layout_width="20sp"
-                android:layout_height="20sp"
-                android:id="@+id/fullNameImageIV"
-                android:layout_below="@+id/profileHeaderIV"
-                android:src="@drawable/bchmobilelogo"
-                android:layout_marginRight="10sp"
-                android:layout_marginTop="10sp" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="20sp"
-                android:id="@+id/fullNameTV"
-                android:layout_toRightOf="@+id/fullNameImageIV"
-                android:layout_below="@+id/profileHeaderIV"
-                android:layout_marginRight="10sp"
-                android:layout_marginTop="10sp"
-                android:textColor="@color/primary_text_default_material_light" />
-
-            <ImageView
-                android:layout_width="20sp"
-                android:layout_height="20sp"
-                android:id="@+id/genderIV"
-                android:layout_below="@+id/fullNameImageIV"
-                android:src="@drawable/bchmobilelogo"
-                android:layout_marginRight="10sp"
-                android:layout_marginTop="10sp" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="20sp"
-                android:id="@+id/genderTV"
-                android:layout_below="@+id/fullNameTV"
-                android:layout_toRightOf="@+id/genderIV"
-                android:layout_marginRight="10sp"
-                android:layout_marginTop="10sp"
-                android:textColor="@color/primary_text_default_material_light" />
-
-            <ImageView
-                android:layout_width="20sp"
-                android:layout_height="20sp"
-                android:id="@+id/statusIV"
-                android:layout_below="@+id/genderIV"
-                android:src="@drawable/bchmobilelogo"
-                android:layout_marginRight="10sp"
-                android:layout_marginTop="10sp" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="20sp"
-                android:id="@+id/statusTV"
-                android:layout_below="@+id/genderTV"
-                android:layout_toRightOf="@+id/statusIV"
-                android:layout_marginRight="10sp"
-                android:layout_marginTop="10sp"
-                android:textColor="@color/primary_text_default_material_light" />
-
-            <ImageView
-                android:layout_width="20sp"
-                android:layout_height="20sp"
-                android:id="@+id/birthdateIV"
-                android:layout_below="@+id/statusIV"
-                android:src="@drawable/bchmobilelogo"
-                android:layout_marginRight="10sp"
-                android:layout_marginTop="10sp" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="20sp"
-                android:id="@+id/birthdateTV"
-                android:layout_below="@+id/statusTV"
-                android:layout_toRightOf="@+id/birthdateIV"
-                android:layout_marginRight="10sp"
-                android:layout_marginTop="10sp"
-                android:textColor="@color/primary_text_default_material_light" />
-
-            <ImageView
-                android:layout_width="20sp"
-                android:layout_height="20sp"
-                android:id="@+id/emailIV"
-                android:layout_below="@+id/birthdateIV"
-                android:src="@drawable/bchmobilelogo"
-                android:layout_marginRight="10sp"
-                android:layout_marginTop="10sp" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="20sp"
-                android:id="@+id/emailTV"
-                android:layout_below="@+id/birthdateTV"
-                android:layout_toRightOf="@+id/emailIV"
-                android:layout_marginRight="10sp"
-                android:layout_marginTop="10sp"
-                android:textColor="@color/primary_text_default_material_light" />
-
-            <ImageView
-                android:layout_width="20sp"
-                android:layout_height="20sp"
-                android:id="@+id/telNoIV"
-                android:layout_below="@+id/emailIV"
-                android:src="@drawable/bchmobilelogo"
-                android:layout_marginRight="10sp"
-                android:layout_marginTop="10sp" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="20sp"
-                android:id="@+id/telNoTV"
-                android:layout_below="@+id/emailTV"
-                android:layout_toRightOf="@+id/telNoIV"
-                android:layout_marginRight="10sp"
-                android:layout_marginTop="10sp"
-                android:textColor="@color/primary_text_default_material_light" />
-
-            <ImageView
-                android:layout_width="20sp"
-                android:layout_height="20sp"
-                android:id="@+id/cellNoIV"
-                android:layout_below="@+id/telNoIV"
-                android:src="@drawable/bchmobilelogo"
-                android:layout_marginRight="10sp"
-                android:layout_marginTop="10sp" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="20sp"
-                android:id="@+id/cellNoTV"
-                android:layout_below="@+id/telNoTV"
-                android:layout_toRightOf="@+id/cellNoIV"
-                android:layout_marginRight="10sp"
-                android:layout_marginTop="10sp"
-                android:textColor="@color/primary_text_default_material_light" />
-
-            <ImageView
-                android:layout_width="20sp"
-                android:layout_height="20sp"
-                android:id="@+id/addressIV"
-                android:layout_below="@+id/cellNoIV"
-                android:src="@drawable/bchmobilelogo"
-                android:layout_marginRight="10sp"
-                android:layout_marginTop="10sp"
-                android:layout_marginBottom="10sp" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="20sp"
-                android:id="@+id/addressTV"
-                android:layout_below="@+id/cellNoTV"
-                android:layout_toRightOf="@+id/addressIV"
-                android:layout_marginRight="10sp"
-                android:layout_marginTop="10sp"
-                android:textColor="@color/primary_text_default_material_light" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/update_profile"
-                android:id="@+id/button"
-                android:layout_below="@+id/addressIV"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:background="@color/colorPrimaryDark"
-                android:textColor="#FFF"
-                android:textSize="@dimen/notification_subtext_size" />
-        </RelativeLayout>
-    </LinearLayout>
-
-</LinearLayout>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/profilePager"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/profileTabs"
+        android:layout_above="@+id/profileButton" />
+</RelativeLayout>
