@@ -173,6 +173,7 @@ public class LoginActivity extends AppCompatActivity {
                 //button.setText(result);
                 Toast.makeText(getApplicationContext(), "Valid", Toast.LENGTH_LONG).show();
                 session.createLoginSession(email,password);
+                //update token
                 switchIntent();
             }
             else if(validAccount == false) {
