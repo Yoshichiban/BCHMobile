@@ -1,7 +1,6 @@
-package com.example.bch_ojt.bch;
+package com.bpocareerhub.bchmobile;
 
 import android.content.Context;
-import android.media.Image;
 import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -9,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import org.json.JSONException;
 import org.json.JSONObject;

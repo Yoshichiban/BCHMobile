@@ -1,4 +1,4 @@
-package com.example.bch_ojt.bch;
+package com.bpocareerhub.bchmobile;
 
 import android.provider.Settings;
 
