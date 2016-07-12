@@ -24,13 +24,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class LoginActivity extends AppCompatActivity {
-    static final String JDBC_DRIVER = "org.postgresql.Driver";
-    static final String DB_URL = "jdbc:postgresql://localhost/db";
-
-    static final String USER = "postgres";
-    static final String PASS = "postgres";
     SessionManager session;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,40 +32,14 @@ public class LoginActivity extends AppCompatActivity {
         session.checkSessionInLogin();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        Button signup = (Button)findViewById(R.id.signup);
 
-        /*try{
-            Class.forName(JDBC_DRIVER);
-            conn = DriverManager.getConnection(DB_URL,USER,PASS);
-
-            String query = "SELECT name FROM user WHERE name = 'admin'";
-            Statement st = conn.createStatement();
-            ResultSet rs = st.executeQuery(query);
-            while(rs.next()){
-                String name = rs.getString("name");
+        signup.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                signup(view);
             }
-            rs.close();
-            stmt.close();
-            conn.close();
-        }catch(SQLException se){
-            //Handle errors for JDBC
-            se.printStackTrace();
-        }catch(Exception e){
-            //Handle errors for Class.forName
-            e.printStackTrace();
-        }finally{
-            //finally block used to close resources
-            try{
-                if(stmt!=null)
-                    stmt.close();
-            }catch(SQLException se2){
-            }// nothing we can do
-            try{
-                if(conn!=null)
-                    conn.close();
-            }catch(SQLException se){
-                se.printStackTrace();
-            }//end finally try
-        }//end try*/
+        });
     }
 
     public void login(View view) {
@@ -87,11 +55,18 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    public void signup(View view){
+        Intent i = new Intent(this, SignupFirstLayerActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(i);
+    }
+
     private boolean checkInternetConnection() {
         ConnectivityManager conn =(ConnectivityManager)getSystemService(getBaseContext().CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork = conn.getActiveNetworkInfo();
         if(activeNetwork != null && activeNetwork.getState() == NetworkInfo.State.CONNECTED){
-            //Toast.makeText(getApplicationContext(), "Connected", Toast.LENGTH_LONG).show();
             return true;
         }
         else if(activeNetwork == null || activeNetwork.getState() == NetworkInfo.State.DISCONNECTED){
@@ -116,8 +91,6 @@ public class LoginActivity extends AppCompatActivity {
                 while ((line = r.readLine()) != null) {
                     total.append(line).append('\n');
                 }
-                //System.out.println(total);
-                //return String.valueOf(conn.getResponseMessage());
 
                 JSONObject jsonResponse = new JSONObject(String.valueOf(total));
                 JSONObject jsonObj = jsonResponse.optJSONObject("user");
@@ -125,12 +98,6 @@ public class LoginActivity extends AppCompatActivity {
                 email = urls[1];
                 password = urls[2];
                 String encryptedPassword = encrypt(password);
-                //String group = String.valueOf(jsonObj.optInt("group_id",0));
-                /*String group = jsonObj.optString("group_id");
-                if(group.equals("2")) return false;*/
-                //String data = email + "\n" + pass;
-                //String data = "email: " + jsonObj.optString("email").toString() + "\npassword: " + jsonObj.optString("password").toString();
-                //data = String.valueOf(conn.getResponseCode());
                 //group_id: 2 = Job Seeker; accept only "Job Seeker" accounts
                 if( email.equals(jsonObj.optString("email")) && encryptedPassword.equals(jsonObj.optString("password")) ) {
                     if("2".equals(jsonObj.optString("group_id"))) {
@@ -158,16 +125,14 @@ public class LoginActivity extends AppCompatActivity {
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(Boolean result) {
-            Button button = (Button) findViewById(R.id.signup);
             if(result) {
-                //button.setText(result);
                 Toast.makeText(getApplicationContext(), "Valid", Toast.LENGTH_LONG).show();
                 session.createLoginSession(email,password);
                 //update token
                 switchIntent();
             }
             else if(validAccount == false) {
-                Toast.makeText(getApplicationContext(), "Not a jobseeker", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Not a jobseeker account", Toast.LENGTH_LONG).show();
             }
             else {
                 Toast.makeText(getApplicationContext(), "Invalid Account Details", Toast.LENGTH_LONG).show();

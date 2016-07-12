@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
@@ -9,4 +10,147 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.bpocareerhub.bchmobile.SignupSecondLayerActivity">
 
-</RelativeLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/bchlogo"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/bchlogo"
+        app:layout_heightPercent="15%"
+        app:layout_widthPercent="65%"
+        android:contentDescription="@string/logo" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/signup"
+        android:layout_below="@+id/bchlogo"
+        android:layout_marginTop="10sp"
+        android:layout_marginBottom="10sp"
+        android:layout_centerHorizontal="true"
+        app:layout_widthPercent="70%"
+        android:scrollbars="none" >
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Address"
+                    android:id="@+id/addressTV"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/city"
+                    android:hint="City Location"
+                    android:layout_below="@+id/addressTV"
+                    android:paddingLeft="15sp"
+                    android:layout_marginBottom="10sp"
+                    android:textSize="16sp"
+                    android:paddingBottom="15sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/schoolInfoTV"
+                    android:text="School Info"
+                    android:layout_below="@id/city"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/school"
+                    android:hint="School"
+                    android:layout_below="@+id/schoolInfoTV"
+                    android:paddingLeft="15sp"
+                    android:textSize="16sp"
+                    android:paddingBottom="15sp" />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/academics"
+                    android:hint="Educational Attainment"
+                    android:layout_below="@+id/school"
+                    android:paddingLeft="15sp"
+                    android:textSize="16sp"
+                    android:paddingBottom="15sp" />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/fieldOfStudy"
+                    android:hint="Field of Study"
+                    android:layout_below="@+id/academics"
+                    android:paddingLeft="15sp"
+                    android:layout_marginBottom="10sp"
+                    android:textSize="16sp"
+                    android:paddingBottom="15sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/experienceTV"
+                    android:text="Work Experience"
+                    android:layout_below="@id/fieldOfStudy"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/positionLevel"
+                    android:hint="Position Level"
+                    android:layout_below="@+id/experienceTV"
+                    android:paddingLeft="15sp"
+                    android:textSize="16sp"
+                    android:paddingBottom="15sp" />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/companyName"
+                    android:hint="Company Name"
+                    android:layout_below="@+id/positionLevel"
+                    android:paddingLeft="15sp"
+                    android:textSize="16sp"
+                    android:paddingBottom="15sp" />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/industry"
+                    android:hint="Industry"
+                    android:layout_below="@+id/companyName"
+                    android:paddingLeft="15sp"
+                    android:textSize="16sp"
+                    android:paddingBottom="15sp" />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/specialization"
+                    android:hint="Specialization"
+                    android:layout_below="@+id/industry"
+                    android:paddingLeft="15sp"
+                    android:textSize="16sp"
+                    android:paddingBottom="15sp" />
+
+            </RelativeLayout>
+    </ScrollView>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/signup"
+        android:text="Sign Up"
+        android:textStyle="bold"
+        android:textColor="#fff"
+        android:typeface="sans"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:background="#51a460"
+        android:layout_marginBottom="10sp" />
+
+</android.support.percent.PercentRelativeLayout>

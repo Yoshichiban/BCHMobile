@@ -11,7 +11,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.bpocareerhub.bchmobile.MainActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,25 +19,25 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.bpocareerhub.bchmobile.LoginActivity"
+            android:name=".LoginActivity"
             android:icon="@drawable/bchmobilelogo" />
-        <activity android:name="com.bpocareerhub.bchmobile.JobActivity">
+        <activity android:name=".JobActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.bpocareerhub.bchmobile.MainActivity" />
         </activity>
-        <activity android:name="com.bpocareerhub.bchmobile.ProfileActivity">
+        <activity android:name=".ProfileActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.bpocareerhub.bchmobile.MainActivity" />
         </activity>
-        <activity android:name="com.bpocareerhub.bchmobile.SettingsActivity">
+        <activity android:name=".SettingsActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.bpocareerhub.bchmobile.MainActivity" />
         </activity>
-        <activity android:name="com.bpocareerhub.bchmobile.SignupFirstLayerActivity" />
-        <activity android:name="com.bpocareerhub.bchmobile.SignupSecondLayerActivity"></activity>
+        <activity android:name=".SignupSecondLayerActivity" />
+        <activity android:name=".SignupFirstLayerActivity"></activity>
     </application>
 
 </manifest>
