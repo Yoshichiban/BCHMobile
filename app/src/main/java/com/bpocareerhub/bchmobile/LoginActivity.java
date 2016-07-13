@@ -64,6 +64,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private boolean checkInternetConnection() {
+        //This module can be improved(e.g., establish a real connection to a webpage and check the result/response)
         ConnectivityManager conn =(ConnectivityManager)getSystemService(getBaseContext().CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork = conn.getActiveNetworkInfo();
         if(activeNetwork != null && activeNetwork.getState() == NetworkInfo.State.CONNECTED){

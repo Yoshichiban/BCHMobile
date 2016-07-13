@@ -11,10 +11,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
@@ -25,8 +26,8 @@ public class SignupFirstLayerActivity extends AppCompatActivity {
     EditText firstNameText, lastNameText, emailText, passwordText, mobileNumberText;
     Context _context;
     SessionManager session;
-    boolean accountExists;
-    String test;
+    String query, message;
+    JSONObject response;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,26 +63,6 @@ public class SignupFirstLayerActivity extends AppCompatActivity {
                 http://www.wikihow.com/Execute-HTTP-POST-Requests-in-Android
                 http://stackoverflow.com/questions/9767952/how-to-add-parameters-to-httpurlconnection-using-post
             */
-                /*
-                URL checkerURL = new URL("http://stagingalpha.bpocareerhub.com/APILogin/processLogin/c019edda9ce8a7b4532344c7928b6786/" + email + "/" + password);
-                HttpURLConnection checkerConn = (HttpURLConnection) checkerURL.openConnection();
-                BufferedReader r = new BufferedReader(new InputStreamReader(checkerConn.getInputStream()));
-                StringBuilder total = new StringBuilder();
-                String line;
-                while ((line = r.readLine()) != null) {
-                    total.append(line).append('\n');
-                }
-
-                //account exists if there is no exception in getting the JSON object
-
-                try {
-                    JSONObject jsonResponse = new JSONObject(String.valueOf(total));
-                    jsonResponse.optJSONObject("user");
-                    accountExists = true;
-                }
-                catch (JSONException e){
-                    accountExists = false;
-                }*/
 
                 URL url = new URL(urls[0]);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -98,28 +79,40 @@ public class SignupFirstLayerActivity extends AppCompatActivity {
                         .appendQueryParameter("txtFirstname",firstName)
                         .appendQueryParameter("txtLastname",lastName)
                         .appendQueryParameter("txtMobileNumber",mobileNumber);
-                String query = builder.build().getEncodedQuery();
+                query = builder.build().getEncodedQuery();
 
                 OutputStream os = conn.getOutputStream();
                 os.write(query.getBytes());
                 os.flush();
                 os.close();
 
+                InputStream responseStream = new BufferedInputStream(conn.getInputStream());
+                BufferedReader responseStreamReader = new BufferedReader(new InputStreamReader(responseStream));
+                String line;
+                StringBuilder stringBuilder = new StringBuilder();
+                while ((line = responseStreamReader.readLine()) != null) {
+                    stringBuilder.append(line);
+                }
+                responseStreamReader.close();
+
+                response = new JSONObject(stringBuilder.toString());
+                message = response.optString("message");
             }
             catch(Exception e) {
-
+                Toast.makeText(_context, "EXCEPTION!", Toast.LENGTH_SHORT).show();
             }
             return null;
         }
 
         @Override
         protected void onPostExecute(Void v) {
-            if(!accountExists) {
+            //no message = signup successful
+            if(message.equals("")) {
                 session.createLoginSession(email,password);
                 switchToProfile();
             }
             else {
-                Toast.makeText(_context, "Account already exists.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(_context, message, Toast.LENGTH_SHORT).show();
             }
         }
     }
