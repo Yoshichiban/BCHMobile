@@ -10,8 +10,10 @@ import android.widget.TextView;
 /**
  * Created by BCH_OJT on 7/4/2016.
  */
-public class PreferenceFragment extends Fragment {
-
+public class PreferenceFragment extends DetailsFragment {
+    View v;
+    SessionManager session;
+    boolean isUpdating;
     public static final PreferenceFragment newInstance(String fullName){
 
         PreferenceFragment f = new PreferenceFragment();
@@ -29,24 +31,35 @@ public class PreferenceFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        session = new SessionManager(getContext());
+        isUpdating = session.getUpdateMode();
 
-        View v = inflater.inflate(R.layout.preferencefragmentlayout, container, false);
 
-        TextView positionTV = (TextView)v.findViewById(R.id.positionTV);
-        TextView employmentTypeTV = (TextView)v.findViewById(R.id.employmentTypeTV);
-        TextView locationTV = (TextView)v.findViewById(R.id.locationTV);
-        TextView industryTV = (TextView)v.findViewById(R.id.industryTV);
-        TextView availabilityTV = (TextView)v.findViewById(R.id.availabilityTV);
-        TextView salaryTV = (TextView)v.findViewById(R.id.salaryTV);
 
-        positionTV.setText("CEO");
-        employmentTypeTV.setText("Primary: Permanent\nSecondary: Project-Based");
-        locationTV.setText("Manila");
-        industryTV.setText("Primary: Law/Legal\nSecondary: Journalism");
-        availabilityTV.setText("Available immediately");
-        salaryTV.setText("71,000 - 80,000");
+        if(!isUpdating) {
+            v = inflater.inflate(R.layout.preferencefragmentlayout, container, false);
 
-        return v;
+            TextView positionTV = (TextView)v.findViewById(R.id.positionTV);
+            TextView employmentTypeTV = (TextView)v.findViewById(R.id.employmentTypeTV);
+            TextView locationTV = (TextView)v.findViewById(R.id.locationTV);
+            TextView industryTV = (TextView)v.findViewById(R.id.industryTV);
+            TextView availabilityTV = (TextView)v.findViewById(R.id.availabilityTV);
+            TextView salaryTV = (TextView)v.findViewById(R.id.salaryTV);
+
+            notIndicated(positionTV);
+            notIndicated(employmentTypeTV);
+            notIndicated(locationTV);
+            notIndicated(industryTV);
+            notIndicated(availabilityTV);
+            notIndicated(salaryTV);
+
+            return v;
+        }
+        else{
+            v = inflater.inflate(R.layout.updatepreference, container, false);
+
+            return v;
+        }
 
     }
 
@@ -54,10 +67,21 @@ public class PreferenceFragment extends Fragment {
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser) {
-            ((ProfileActivity)getActivity()).updateActiveFragment(2);
+            ((ProfileActivity)getActivity()).updateActiveFragment(1);
         }
-        else {
+    }
+/*
+    private void setTextView(TextView tv, String content){
+        if(content.equals("null") || content.isEmpty()){
+            notIndicated(tv);
+        }
+        else{
+            tv.setText(content);
         }
     }
 
+    private void notIndicated(TextView tv){
+        tv.setText("[Not Indicated]");
+    }
+*/
 }

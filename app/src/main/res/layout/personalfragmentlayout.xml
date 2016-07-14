@@ -13,7 +13,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="20sp"
-                    android:id="@+id/profileHeaderIV"
+                    android:id="@+id/profileHeaderTV"
                     android:text="@string/profileHeader"
                     android:textColor="@color/primary_text_default_material_light"
                     android:textSize="@dimen/abc_text_size_subhead_material"
@@ -25,18 +25,16 @@
                     android:layout_width="20sp"
                     android:layout_height="20sp"
                     android:id="@+id/fullNameImageIV"
-                    android:layout_below="@+id/profileHeaderIV"
-                    android:src="@drawable/bchmobilelogo"
-                    android:layout_marginRight="10sp"
-                    android:layout_marginTop="10sp" />
+                    android:layout_below="@+id/profileHeaderTV"
+                    android:src="@drawable/name"
+                    android:layout_marginRight="10sp" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="20sp"
                     android:id="@+id/fullNameTV"
                     android:layout_toRightOf="@+id/fullNameImageIV"
-                    android:layout_below="@+id/profileHeaderIV"
+                    android:layout_below="@+id/profileHeaderTV"
                     android:layout_marginRight="10sp"
-                    android:layout_marginTop="10sp"
                     android:textColor="@color/primary_text_default_material_light" />
 
                 <ImageView
@@ -44,7 +42,7 @@
                     android:layout_height="20sp"
                     android:id="@+id/genderIV"
                     android:layout_below="@+id/fullNameImageIV"
-                    android:src="@drawable/bchmobilelogo"
+                    android:src="@drawable/gender"
                     android:layout_marginRight="10sp"
                     android:layout_marginTop="10sp" />
                 <TextView
@@ -62,7 +60,7 @@
                     android:layout_height="20sp"
                     android:id="@+id/statusIV"
                     android:layout_below="@+id/genderIV"
-                    android:src="@drawable/bchmobilelogo"
+                    android:src="@drawable/status"
                     android:layout_marginRight="10sp"
                     android:layout_marginTop="10sp" />
                 <TextView
@@ -80,7 +78,7 @@
                     android:layout_height="20sp"
                     android:id="@+id/birthdateIV"
                     android:layout_below="@+id/statusIV"
-                    android:src="@drawable/bchmobilelogo"
+                    android:src="@drawable/birthdate"
                     android:layout_marginRight="10sp"
                     android:layout_marginTop="10sp" />
                 <TextView
@@ -98,7 +96,7 @@
                     android:layout_height="20sp"
                     android:id="@+id/emailIV"
                     android:layout_below="@+id/birthdateIV"
-                    android:src="@drawable/bchmobilelogo"
+                    android:src="@drawable/email"
                     android:layout_marginRight="10sp"
                     android:layout_marginTop="10sp" />
                 <TextView
@@ -116,7 +114,7 @@
                     android:layout_height="20sp"
                     android:id="@+id/telNoIV"
                     android:layout_below="@+id/emailIV"
-                    android:src="@drawable/bchmobilelogo"
+                    android:src="@drawable/telno"
                     android:layout_marginRight="10sp"
                     android:layout_marginTop="10sp" />
                 <TextView
@@ -134,7 +132,7 @@
                     android:layout_height="20sp"
                     android:id="@+id/cellNoIV"
                     android:layout_below="@+id/telNoIV"
-                    android:src="@drawable/bchmobilelogo"
+                    android:src="@drawable/cellno"
                     android:layout_marginRight="10sp"
                     android:layout_marginTop="10sp" />
                 <TextView
@@ -152,7 +150,7 @@
                     android:layout_height="20sp"
                     android:id="@+id/addressIV"
                     android:layout_below="@+id/cellNoIV"
-                    android:src="@drawable/bchmobilelogo"
+                    android:src="@drawable/address"
                     android:layout_marginRight="10sp"
                     android:layout_marginTop="10sp"
                     android:layout_marginBottom="10sp" />

@@ -11,7 +11,9 @@ import android.widget.TextView;
  * Created by BCH_OJT on 7/4/2016.
  */
 public class ExperienceFragment extends Fragment {
-
+    View v;
+    SessionManager session;
+    boolean isUpdating;
     public static final ExperienceFragment newInstance(String experience){
 
         ExperienceFragment f = new ExperienceFragment();
@@ -29,17 +31,27 @@ public class ExperienceFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        session = new SessionManager(getContext());
+        isUpdating = session.getUpdateMode();
 
         String experience = getArguments().getString("experience");
 
 
-        View v = inflater.inflate(R.layout.experiencefragmentlayout, container, false);
+        if(!isUpdating) {
+            v = inflater.inflate(R.layout.experiencefragmentlayout, container, false);
 
-        TextView experienceTV = (TextView)v.findViewById(R.id.experienceTV);
+            TextView experienceTV = (TextView) v.findViewById(R.id.experienceTV);
 
-        experienceTV.setText(experience);
+            //experienceTV.setText(experience);
+            experienceTV.setText("[Not Indicated]");
 
-        return v;
+            return v;
+        }
+        else{
+            v = inflater.inflate(R.layout.updateexperience, container, false);
+
+            return v;
+        }
 
     }
 
@@ -47,9 +59,7 @@ public class ExperienceFragment extends Fragment {
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser) {
-            ((ProfileActivity)getActivity()).updateActiveFragment(3);
-        }
-        else {
+            ((ProfileActivity)getActivity()).updateActiveFragment(2);
         }
     }
 

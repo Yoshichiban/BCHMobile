@@ -10,8 +10,10 @@ import android.widget.TextView;
 /**
  * Created by BCH_OJT on 7/4/2016.
  */
-public class EducationFragment extends Fragment {
-
+public class EducationFragment extends DetailsFragment {
+    View v;
+    SessionManager session;
+    boolean isUpdating;
     public static final EducationFragment newInstance(String education){
 
         EducationFragment f = new EducationFragment();
@@ -29,17 +31,26 @@ public class EducationFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        session = new SessionManager(getContext());
+        isUpdating = session.getUpdateMode();
 
         String education = getArguments().getString("education");
 
+        if(!isUpdating) {
+            v = inflater.inflate(R.layout.educationfragmentlayout, container, false);
 
-        View v = inflater.inflate(R.layout.educationfragmentlayout, container, false);
+            TextView educationTV = (TextView) v.findViewById(R.id.educationTV);
 
-        TextView educationTV = (TextView)v.findViewById(R.id.educationTV);
+            //educationTV.setText(education);
+            educationTV.setText("[Not Indicated]");
 
-        educationTV.setText(education);
+            return v;
+        }
+        else{
+            v = inflater.inflate(R.layout.updateeducation, container, false);
 
-        return v;
+            return v;
+        }
 
     }
 
@@ -47,9 +58,7 @@ public class EducationFragment extends Fragment {
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser) {
-            ((ProfileActivity)getActivity()).updateActiveFragment(4);
-        }
-        else {
+            ((ProfileActivity)getActivity()).updateActiveFragment(3);
         }
     }
 

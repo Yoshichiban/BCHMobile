@@ -105,4 +105,5 @@
     <string name="interviews">Interviews</string>
     <string name="saved_jobs">Saved Jobs</string>
     <string name="update_profile">Update Profile</string>
+    <string name="save_changes">Save Changes</string>
 </resources>

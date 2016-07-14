@@ -158,20 +158,33 @@
 
     <!-- Personal Details -->
 
-    <Button
+    <ViewSwitcher
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/update_profile"
-        android:id="@+id/profileButton"
-        android:background="@color/colorPrimaryDark"
-        android:textColor="#FFF"
-        android:textSize="@dimen/notification_subtext_size"
-        android:layout_alignParentBottom="true" />
+        android:id="@+id/buttonSwitcher"
+        android:layout_alignParentBottom="true">
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/update_profile"
+            android:id="@+id/updateProfileButton"
+            android:background="@color/colorPrimaryDark"
+            android:textColor="#FFF"
+            android:textSize="@dimen/notification_subtext_size" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/saveChangesButton"
+            android:background="@color/colorPrimaryDark"
+            android:textColor="#FFF"
+            android:textSize="@dimen/notification_subtext_size"
+            android:text="@string/save_changes" />
+    </ViewSwitcher>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/profilePager"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/profileTabs"
-        android:layout_above="@+id/profileButton" />
+        android:layout_above="@+id/buttonSwitcher" />
 </android.support.percent.PercentRelativeLayout>

@@ -11,7 +11,12 @@ import android.widget.TextView;
  * Created by BCH_OJT on 7/4/2016.
  */
 public class SkillsFragment extends Fragment {
+    View v;
+    SessionManager session;
+    boolean isUpdating;
 
+    TextView skillsTV;
+    TextView languagesTV;
     public static final SkillsFragment newInstance(String skills, String languages){
 
         SkillsFragment f = new SkillsFragment();
@@ -30,19 +35,29 @@ public class SkillsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        session = new SessionManager(getContext());
+        isUpdating = session.getUpdateMode();
 
         String skills = getArguments().getString("skills");
         String languages = getArguments().getString("languages");
 
-        View v = inflater.inflate(R.layout.skillsfragmentlayout, container, false);
+        if(!isUpdating) {
+            v = inflater.inflate(R.layout.skillsfragmentlayout, container, false);
 
-        TextView skillsTV = (TextView)v.findViewById(R.id.skillsTV);
-        TextView languagesTV = (TextView)v.findViewById(R.id.languagesTV);
-        
-        skillsTV.setText(skills);
-        languagesTV.setText(languages);
+            TextView skillsTV = (TextView) v.findViewById(R.id.skillsTV);
+            TextView languagesTV = (TextView) v.findViewById(R.id.languagesTV);
 
-        return v;
+            //skillsTV.setText(skills);
+            //languagesTV.setText(languages);
+            skillsTV.setText("[Not Indicated]");
+            languagesTV.setText("[Not Indicated]");
+            return v;
+        }
+        else{
+            v = inflater.inflate(R.layout.updateskills, container, false);
+
+            return v;
+        }
 
     }
 
@@ -50,9 +65,10 @@ public class SkillsFragment extends Fragment {
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser) {
-            ((ProfileActivity)getActivity()).updateActiveFragment(5);
+            ((ProfileActivity)getActivity()).updateActiveFragment(4);
         }
-        else {
+        else{
+
         }
     }
 

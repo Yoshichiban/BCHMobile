@@ -57,6 +57,20 @@ public class SessionManager {
 
         return user;
     }
+
+    public boolean getUpdateMode(){
+        return pref.getBoolean("isUpdating",false);
+    }
+    public void updateOn(){
+        editor.putBoolean("isUpdating",true);
+
+        editor.commit();
+    }
+    public void updateOff(){
+        editor.putBoolean("isUpdating",false);
+
+        editor.commit();
+    }
     public void logoutSession(){
         editor.clear();
         editor.commit();

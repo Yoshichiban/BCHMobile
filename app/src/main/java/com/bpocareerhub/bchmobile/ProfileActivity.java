@@ -1,13 +1,18 @@
 package com.bpocareerhub.bchmobile;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ViewSwitcher;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -51,19 +56,99 @@ public class ProfileActivity extends AppCompatActivity {
     private ImageView educationIV;
     private ImageView skillsIV;
 
-
     ProfilePageAdapter pageAdapter;
+    ViewPager pager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
+        _context = this;
+        session = new SessionManager(_context);
+        session.updateOff();
+
+        pager = (ViewPager)findViewById(R.id.profilePager);
         detailsIV = (ImageView)findViewById(R.id.detailsIV);
         preferenceIV = (ImageView)findViewById(R.id.preferenceIV);
         experienceIV = (ImageView)findViewById(R.id.experienceIV);
         educationIV = (ImageView)findViewById(R.id.educationIV);
         skillsIV = (ImageView)findViewById(R.id.skillsIV);
 
+        detailsIV.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                if(currentFragment!=0){
+                    updateActiveFragment(0);
+                    pager.setCurrentItem(0);
+                }
+            }
+        });
+        preferenceIV.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                if(currentFragment!=1){
+                    updateActiveFragment(1);
+                    pager.setCurrentItem(1);
+                }
+            }
+        });
+        experienceIV.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                if(currentFragment!=2){
+                    updateActiveFragment(2);
+                    pager.setCurrentItem(2);
+                }
+            }
+        });
+        educationIV.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                if(currentFragment!=3){
+                    updateActiveFragment(3);
+                    pager.setCurrentItem(3);
+                }
+            }
+        });
+        skillsIV.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                if(currentFragment!=4){
+                    updateActiveFragment(4);
+                    pager.setCurrentItem(4);
+                }
+            }
+        });
+
+        Button updateProfileButton = (Button) findViewById(R.id.updateProfileButton);
+        updateProfileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                session.updateOn();
+                pageAdapter.notifyDataSetChanged();
+                ViewSwitcher switcher = (ViewSwitcher) findViewById(R.id.buttonSwitcher);
+                switcher.showNext();
+
+            }
+        });
+
+        Button saveChangesButton = (Button) findViewById(R.id.saveChangesButton);
+        saveChangesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //saveChanges();
+                /*
+                refresh;
+                get updated info and recreate profile activity fragments
+                */
+                session.updateOff();
+                pageAdapter.notifyDataSetChanged();
+                ViewSwitcher switcher = (ViewSwitcher) findViewById(R.id.buttonSwitcher);
+                switcher.showPrevious();
+            }
+        });
         _context = getApplicationContext();
         session = new SessionManager(_context);
         HashMap<String, String> user = session.getUserDetails();
@@ -92,12 +177,19 @@ public class ProfileActivity extends AppCompatActivity {
                 JSONObject jsonObj = jsonResponse.optJSONObject("user");
 
                 fullName = jsonObj.getString("fullname");
+                /*gender = jsonObj.getString("gender");
+                status = jsonObj.getString("status")*/
                 gender = "Male";
                 status = "It's Complicated";
                 birthdate = DateFormat.getDateInstance(DateFormat.LONG).format(jsonObj.getLong("date_created"));
                 telNo = jsonObj.getString("date_activated");//TO EDIT
                 cellNo = jsonObj.getString("mobile_number");
                 address = jsonObj.getString("address_details");
+                /*
+                experience = jsonObj.getString("experience");
+                education = jsonObj.getString("education");
+                skills = jsonObj.getString("skills");
+                languages = jsonObj.getString("languages")*/
                 experience = "La Liga Filipina\nCEO (1892)\n\nLa Solidaridad\nContributory Writer (1889)\n\nFreelance Author\nLiterary Author (1884 - 1887)";
                 education = "Universidad Central de Madrid\nLicentiate in Philosophy and Letters (1882 - 1885)";
                 skills = "Playboy Extraordinaire\nAdvanced";
@@ -126,11 +218,7 @@ public class ProfileActivity extends AppCompatActivity {
         protected void onPostExecute(Void v) {
 
             List<Fragment> fragments = getFragments();
-
             pageAdapter = new ProfilePageAdapter(getSupportFragmentManager(), fragments);
-
-            ViewPager pager = (ViewPager)findViewById(R.id.profilePager);
-
             pager.setAdapter(pageAdapter);
         }
     }
@@ -141,30 +229,33 @@ public class ProfileActivity extends AppCompatActivity {
 
         fList.add(DetailsFragment.newInstance(fullName,gender,status,birthdate,email,telNo,cellNo,address));
         fList.add(PreferenceFragment.newInstance("Yehosaru"));
-        fList.add(ExperienceFragment.newInstance(experience));
-        fList.add(EducationFragment.newInstance(education));
-        fList.add(SkillsFragment.newInstance(skills,languages));
+        //fList.add(ExperienceFragment.newInstance(experience));
+        //fList.add(EducationFragment.newInstance(education));
+        //fList.add(SkillsFragment.newInstance(skills,languages));
 
         return fList;
 
     }
 
     public void updateActiveFragment(int fragment){
+        /*
+        updates the active icon on the navigation
+         */
         deactivatePreviousFragment(currentFragment);
         switch (fragment){
-            case 1:
+            case 0:
                 detailsIV.setImageResource(R.drawable.personal_h);
                 break;
-            case 2:
+            case 1:
                 preferenceIV.setImageResource(R.drawable.preference_h);
                 break;
-            case 3:
+            case 2:
                 experienceIV.setImageResource(R.drawable.experience_h);
                 break;
-            case 4:
+            case 3:
                 educationIV.setImageResource(R.drawable.education_h);
                 break;
-            case 5:
+            case 4:
                 skillsIV.setImageResource(R.drawable.skills_h);
                 break;
         }
@@ -173,21 +264,22 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void deactivatePreviousFragment(int prevFragment){
         switch(prevFragment){
-            case 1:
+            case 0:
                 detailsIV.setImageResource(R.drawable.personal);
                 break;
-            case 2:
+            case 1:
                 preferenceIV.setImageResource(R.drawable.preference);
                 break;
-            case 3:
+            case 2:
                 experienceIV.setImageResource(R.drawable.experience);
                 break;
-            case 4:
+            case 3:
                 educationIV.setImageResource(R.drawable.education);
                 break;
-            case 5:
+            case 4:
                 skillsIV.setImageResource(R.drawable.skills);
                 break;
         }
     }
+
 }

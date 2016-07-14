@@ -16,111 +16,113 @@
             android:id="@+id/preferenceHeadingTV"
             android:textSize="16sp"
             android:layout_marginTop="5sp"
-            android:layout_marginBottom="15sp"
             android:textStyle="bold" />
 
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/positionEV"
+            android:layout_below="@+id/preferenceHeadingTV"
+            android:layout_marginBottom="5sp"
+            android:layout_toRightOf="@+id/positionHeadingTV" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/positionHeadingTV"
             android:text="Position Level: "
+            android:gravity="center"
             android:textStyle="bold"
             android:layout_below="@+id/preferenceHeadingTV"
             android:layout_marginLeft="5sp"
-            android:layout_marginBottom="10sp" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/positionTV"
-            android:layout_toRightOf="@+id/positionHeadingTV"
-            android:layout_below="@+id/preferenceHeadingTV"
-            android:layout_marginBottom="5sp" />
+            android:layout_alignBottom="@+id/positionEV" />
 
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/employmentTypeTV"
+            android:layout_below="@+id/employmentTypeHeadingTV"
+            android:layout_marginLeft="20sp"
+            android:layout_marginBottom="10sp" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/employmentTypeHeadingTV"
             android:text="Employment Type"
             android:textStyle="bold"
-            android:layout_below="@+id/positionHeadingTV"
+            android:layout_below="@+id/positionEV"
             android:layout_marginLeft="5sp"
             android:layout_marginBottom="3sp" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/employmentTypeTV"
-            android:layout_below="@+id/employmentTypeHeadingTV"
-            android:layout_marginLeft="20sp"
-            android:layout_marginBottom="10sp" />
 
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/locationEV"
+            android:layout_below="@+id/employmentTypeTV"
+            android:layout_toRightOf="@+id/locationHeadingTV"
+            android:layout_marginBottom="5sp" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/locationHeadingTV"
             android:text="Location: "
+            android:gravity="center"
             android:textStyle="bold"
             android:layout_below="@+id/employmentTypeTV"
             android:layout_marginLeft="5sp"
-            android:layout_marginBottom="10sp" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/locationTV"
-            android:layout_below="@+id/employmentTypeTV"
-            android:layout_toRightOf="@+id/locationHeadingTV"
-            android:layout_marginBottom="5sp" />
+            android:layout_alignBottom="@+id/locationEV" />
 
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/industryEV"
+            android:layout_below="@+id/industryHeadingTV"
+            android:layout_marginLeft="20sp"
+            android:layout_marginBottom="10sp" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/industryHeadingTV"
             android:text="Industry"
             android:textStyle="bold"
-            android:layout_below="@+id/locationHeadingTV"
+            android:layout_below="@+id/locationEV"
             android:layout_marginLeft="5sp"
             android:layout_marginBottom="3sp" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/industryTV"
-            android:layout_below="@+id/industryHeadingTV"
-            android:layout_marginLeft="20sp"
-            android:layout_marginBottom="10sp" />
 
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/availabilityEV"
+            android:layout_below="@+id/industryEV"
+            android:layout_toRightOf="@+id/availabilityHeadingTV"
+            android:layout_marginBottom="5sp" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/availabilityHeadingTV"
             android:text="Availability: "
+            android:gravity="center"
             android:textStyle="bold"
-            android:layout_below="@+id/industryTV"
+            android:layout_below="@+id/industryEV"
             android:layout_marginLeft="5sp"
-            android:layout_marginBottom="10sp" />
-        <TextView
-            android:layout_width="wrap_content"
+            android:layout_alignBottom="@+id/availabilityEV" />
+<!--
+        <EditText
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/availabilityTV"
-            android:layout_below="@+id/industryTV"
-            android:layout_toRightOf="@+id/availabilityHeadingTV"
-            android:layout_marginBottom="5sp" />
-
+            android:id="@+id/salaryEV"
+            android:layout_below="@+id/availabilityEV"
+            android:layout_toRightOf="@+id/salaryHeadingTV" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/salaryHeadingTV"
             android:text="Salary Range: PHP "
+            android:gravity="center"
             android:textStyle="bold"
-            android:layout_below="@+id/availabilityHeadingTV"
+            android:layout_below="@+id/availabilityEV"
             android:layout_marginLeft="5sp"
-            android:layout_marginBottom="10sp" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/salaryTV"
-            android:layout_below="@+id/availabilityHeadingTV"
-            android:layout_toRightOf="@+id/salaryHeadingTV" />
-
-
-
+            android:layout_alignBottom="@+id/salaryEV" />
+            -->
     </RelativeLayout>
 </ScrollView>
